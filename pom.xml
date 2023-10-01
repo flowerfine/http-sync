@@ -28,9 +28,10 @@
         <scala.version>2.13.0</scala.version>
         <scala.binary.version>2.13</scala.binary.version>
         <jackson.version>2.13.5</jackson.version>
+        <knife4j.version>4.1.0</knife4j.version>
         <arrow.version>7.0.0</arrow.version>
         <seatunnel.version>2.3.3</seatunnel.version>
-        <milky.version>1.0.6_8</milky.version>
+        <milky.version>1.0.7</milky.version>
         <flink.version>1.13.6</flink.version>
 
         <mysql.connector.version>8.0.22</mysql.connector.version>
@@ -74,6 +75,14 @@
                 <groupId>com.typesafe.akka</groupId>
                 <artifactId>akka-http-bom_${scala.binary.version}</artifactId>
                 <version>${akka.http.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-dependencies</artifactId>
+                <version>${knife4j.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
