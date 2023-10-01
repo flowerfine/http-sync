@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+
+  mysql:
+    image: bitnami/mysql:8.0
+    container_name: mysql
+    environment:
+      - TZ=Asia/Shanghai
+      - MYSQL_ROOT_USER=root
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_AUTHENTICATION_PLUGIN=mysql_native_password
+      - MYSQL_DATABASE=data_service
+    ports:
+      - 3306:3306
+    volumes:
+      - ../mysql/my_custom.cnf:/opt/bitnami/mysql/conf/my_custom.cnf
+      - ../mysql/init.d:/docker-entrypoint-initdb.d
+    networks:
+      - http-sync
+
+networks:
+  http-sync:
+    driver: bridge
