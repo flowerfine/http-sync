@@ -16,8 +16,6 @@ public interface JobContext2<Root extends RootTask, Sub extends SubTask> {
 
     JobAuthorization getAuthorization();
 
-    JobSyncOffset getSyncOffset();
-
     Properties getProperties();
 
     MeterRegistry getMetrics();
