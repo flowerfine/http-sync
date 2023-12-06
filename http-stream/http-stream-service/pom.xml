@@ -5,20 +5,21 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>cn.sliew</groupId>
-        <artifactId>http-sync</artifactId>
+        <artifactId>http-stream</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>http-stream</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>http-stream-service</artifactId>
 
-    <modules>
-        <module>http-stream-common</module>
-        <module>http-stream-dao</module>
-        <module>http-stream-remote</module>
-        <module>http-stream-service</module>
-        <module>http-stream-akka</module>
-        <module>http-stream-web</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>http-stream-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>http-stream-dao</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
