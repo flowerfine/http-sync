@@ -3,8 +3,6 @@ package cn.sliew.http.stream.akka.jst.order;
 import akka.actor.typed.ActorSystem;
 import cn.sliew.http.stream.akka.jst.JstIncrementalJobContext;
 import cn.sliew.http.stream.common.util.DateUtil;
-import cn.sliew.http.stream.dao.entity.job.JobSyncOffset;
-import cn.sliew.http.stream.dao.mapper.job.JobSyncOffsetMapper;
 import io.micrometer.core.instrument.MeterRegistry;
 
 import java.time.LocalDateTime;

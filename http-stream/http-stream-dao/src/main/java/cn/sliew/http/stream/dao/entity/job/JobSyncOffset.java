@@ -1,30 +1,28 @@
 package cn.sliew.http.stream.dao.entity.job;
 
 import cn.sliew.http.stream.dao.entity.BaseEntity;
-import lombok.Getter;
-import lombok.Setter;
-
-import java.util.Date;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 
 /**
- * 任务同步位点
+ * 任务进度位点
  */
-@Getter
-@Setter
+@Data
+@TableName("job_sync_offset")
 public class JobSyncOffset extends BaseEntity {
 
-    /**
-     * 接口名称
-     */
-    private String method;
+    private static final long serialVersionUID = 1L;
 
-    /**
-     * 开始时间
-     */
-    private Date startTime;
+    @TableField("job_id")
+    private Long jobId;
 
-    /**
-     * 结束时间
-     */
-    private Date endTime;
+    @TableField("authorization_id")
+    private Long authorizationId;
+
+    @TableField("last_sync_offset")
+    private String lastSyncOffset;
+
+    @TableField("sync_offset")
+    private String syncOffset;
 }

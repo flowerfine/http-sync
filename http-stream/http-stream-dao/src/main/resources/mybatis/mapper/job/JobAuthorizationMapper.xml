@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.sliew.http.stream.dao.mapper.job.JobSyncOffsetMapper">
+<mapper namespace="cn.sliew.http.stream.dao.mapper.job.JobAuthorizationMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="cn.sliew.http.stream.dao.entity.job.JobSyncOffset">
+    <resultMap id="BaseResultMap" type="cn.sliew.http.stream.dao.entity.job.JobAuthorization">
         <result column="id" property="id" />
-        <result column="job_id" property="jobId" />
-        <result column="authorization_id" property="authorizationId" />
-        <result column="last_sync_offset" property="lastSyncOffset" />
-        <result column="sync_offset" property="syncOffset" />
+        <result column="account" property="account" />
+        <result column="sub_account" property="subAccount" />
+        <result column="authorization" property="authorization" />
         <result column="creator" property="creator" />
         <result column="modifier" property="modifier" />
         <result column="is_deleted" property="isDeleted" />
@@ -19,7 +18,7 @@
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id,
-        job_id, authorization_id, last_sync_offset, sync_offset,
+        `account`, sub_account, authorization,
         creator, modifier, is_deleted, gmt_create, gmt_modified
     </sql>
 

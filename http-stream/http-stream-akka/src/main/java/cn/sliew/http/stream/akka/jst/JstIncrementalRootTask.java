@@ -3,7 +3,6 @@ package cn.sliew.http.stream.akka.jst;
 import cn.sliew.http.stream.akka.framework.RootTask;
 import cn.sliew.http.stream.common.util.DateUtil;
 import cn.sliew.http.stream.common.util.SyncOffsetHelper;
-import cn.sliew.http.stream.dao.entity.job.JobSyncOffset;
 import cn.sliew.milky.common.collect.Tuple;
 import lombok.extern.slf4j.Slf4j;
 

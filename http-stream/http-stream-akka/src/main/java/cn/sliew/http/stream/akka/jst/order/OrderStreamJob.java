@@ -13,7 +13,6 @@ import cn.sliew.http.stream.akka.framework.ProcessResult;
 import cn.sliew.http.stream.akka.framework.incremental.DefaultIncrementalJobProcessor;
 import cn.sliew.http.stream.akka.jst.JstMethodEnum;
 import cn.sliew.http.stream.akka.jst.JstSubTask;
-import cn.sliew.http.stream.dao.mapper.job.JobSyncOffsetMapper;
 import cn.sliew.http.stream.dao.mapper.jst.JstOrderMapper;
 import cn.sliew.http.stream.remote.jst.JstRemoteService;
 import io.micrometer.core.instrument.MeterRegistry;

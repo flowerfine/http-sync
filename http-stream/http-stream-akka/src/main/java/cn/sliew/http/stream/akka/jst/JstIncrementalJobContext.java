@@ -3,8 +3,6 @@ package cn.sliew.http.stream.akka.jst;
 import akka.actor.typed.ActorSystem;
 import cn.sliew.http.stream.akka.framework.batch.BatchJobContext;
 import cn.sliew.http.stream.akka.framework.incremental.IncrementalJobContext;
-import cn.sliew.http.stream.dao.entity.job.JobSyncOffset;
-import cn.sliew.http.stream.dao.mapper.job.JobSyncOffsetMapper;
 import io.micrometer.core.instrument.MeterRegistry;
 
 import java.util.Properties;
