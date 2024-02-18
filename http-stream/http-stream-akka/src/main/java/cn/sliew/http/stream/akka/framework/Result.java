@@ -1,6 +1,8 @@
 package cn.sliew.http.stream.akka.framework;
 
-public interface Result {
+import java.util.Optional;
+
+public interface Result<Context extends JobContext> {
 
     boolean isSuccess();
 
@@ -8,5 +10,5 @@ public interface Result {
 
     Throwable getThrowable();
 
-    SubTask getSubTask();
+    Optional<SubTask<Context>> getSubTask();
 }

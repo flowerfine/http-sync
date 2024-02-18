@@ -1,45 +1,35 @@
 package cn.sliew.http.stream.akka.jst;
 
 import akka.actor.typed.ActorSystem;
-import cn.sliew.http.stream.akka.framework.batch.BatchJobContext;
-import cn.sliew.http.stream.akka.framework.incremental.IncrementalJobContext;
+import cn.sliew.http.stream.akka.framework.Parallel;
+import cn.sliew.http.stream.akka.framework.SyncOffsetJobContext;
+import cn.sliew.http.stream.akka.framework.SyncOffsetManager;
+import cn.sliew.http.stream.akka.framework.base.AbstractJobContext;
+import cn.sliew.http.stream.common.util.DateUtil;
+import cn.sliew.http.stream.dao.entity.job.JobAuthorization;
+import cn.sliew.http.stream.dao.entity.job.JobInfo;
 import io.micrometer.core.instrument.MeterRegistry;
 
 import java.util.Properties;
 
-public abstract class JstIncrementalJobContext extends BatchJobContext<JstIncrementalRootTask, JstIncrementalSubTask>
-        implements IncrementalJobContext<JobSyncOffset, JstIncrementalRootTask, JstIncrementalSubTask> {
+public abstract class JstIncrementalJobContext
+        extends AbstractJobContext<JstIncrementalRootTask, JstIncrementalSubTask>
+        implements SyncOffsetJobContext<JstIncrementalRootTask, JstIncrementalSubTask>, Parallel {
 
-    protected final JobSyncOffsetMapper jobSyncOffsetMapper;
+    private final SyncOffsetManager syncOffsetManager;
 
-    public JstIncrementalJobContext(String jobName,
-                                    Properties properties,
-                                    MeterRegistry meterRegistry,
-                                    ActorSystem actorSystem,
-                                    JobSyncOffsetMapper jobSyncOffsetMapper) {
-        super(jobName, properties, meterRegistry, actorSystem);
-        this.jobSyncOffsetMapper = jobSyncOffsetMapper;
+    public JstIncrementalJobContext(Long jobId, Long jobInstanceId, JobInfo job, JobAuthorization authorization, Properties properties, MeterRegistry meterRegistry, ActorSystem actorSystem, SyncOffsetManager syncOffsetManager) {
+        super(jobId, jobInstanceId, job, authorization, properties, meterRegistry, actorSystem);
+        this.syncOffsetManager = syncOffsetManager;
     }
 
     @Override
-    public JobSyncOffset getSyncOffset(JstIncrementalRootTask rootTask) {
-        JobSyncOffset jstSyncOffset = jobSyncOffsetMapper.selectByMethod(getJobName());
-        if (jstSyncOffset != null) {
-            return jstSyncOffset;
-        }
-
-        return initSyncOffset();
+    public SyncOffsetManager getSyncOffsetManager() {
+        return syncOffsetManager;
     }
 
     @Override
-    public void updateSyncOffset(JstIncrementalSubTask subTask) {
-        JobSyncOffset syncOffset = new JobSyncOffset();
-        syncOffset.setMethod(getJobName());
-        syncOffset.setStartTime(subTask.getStartTime());
-        syncOffset.setEndTime(subTask.getEndTime());
-        syncOffset.setModifier("sync-task");
-        jobSyncOffsetMapper.updateByMethod(syncOffset);
+    public String getFinalSyncOffset() {
+        return DateUtil.formatDateTime(DateUtil.lastHour());
     }
-
-    protected abstract JobSyncOffset initSyncOffset();
 }

@@ -26,14 +26,17 @@ class OrderSubTask extends JstIncrementalSubTask<OrderJobContext, OrdersSingleQu
     private final JstRemoteService jstRemoteService;
     private final JstOrderMapper jstOrderMapper;
 
-    public OrderSubTask(Long identifier, Date startTime, Date endTime, JstRemoteService jstRemoteService, JstOrderMapper jstOrderMapper) {
-        super(identifier, startTime, endTime);
+    public OrderSubTask(Long id, Date startTime, Date endTime, JstRemoteService jstRemoteService, JstOrderMapper jstOrderMapper) {
+        super(id, startTime, endTime);
         this.jstRemoteService = jstRemoteService;
         this.jstOrderMapper = jstOrderMapper;
     }
 
     @Override
     protected Source<FetchResult<OrdersSingleQuery, JstOrdersResult>, NotUsed> fetch(OrderJobContext context) {
+        // 开放平台接口在实现分页接口时，数据需降序排序防止数据丢失
+        // 如果接口按照升序排序，需从最后一页一直查询到第一页
+        // 如果未排序，则存在数据丢失风险
         OrdersSingleQuery query = getFirstPageQuery();
         return Source.unfoldAsync(query, key -> {
             if (key == null) {
@@ -51,23 +54,18 @@ class OrderSubTask extends JstIncrementalSubTask<OrderJobContext, OrdersSingleQu
     }
 
     @Override
-    protected void persist(OrderJobContext context, FetchResult<OrdersSingleQuery, JstOrdersResult> data) {
-        persistData(context, data.getQuery(), data.getResult());
-    }
-
-    @Override
     protected JstOrdersResult queryJst(OrderJobContext context, OrdersSingleQuery query) {
         JstOrdersResult jstResult = jstRemoteService.ordersSingleQuery(query);
         if (jstResult.isSuccess()) {
             if (log.isDebugEnabled()) {
-                log.debug("请求聚水潭接口返回结果 method: {}, query: {}, page_index: {}, page_size: {}, data_count: {}, page_count: {}",
-                        context.getJobName(), JacksonUtil.toJsonString(query), jstResult.getPageIndex(), jstResult.getPageSize(),
+                log.debug("请求聚水潭接口返回结果 job: {}, query: {}, page_index: {}, page_size: {}, data_count: {}, page_count: {}",
+                        JacksonUtil.toJsonString(context.getJob()), JacksonUtil.toJsonString(query), jstResult.getPageIndex(), jstResult.getPageSize(),
                         jstResult.getDataCount(), jstResult.getPageCount());
             }
             return jstResult;
         }
-        log.error("请求聚水潭接口失败! method: {}, code: {}, msg: {}, query: {}",
-                context.getJobName(), jstResult.getCode(), jstResult.getMsg(), JacksonUtil.toJsonString(query));
+        log.error("请求聚水潭接口失败! job: {}, code: {}, msg: {}, query: {}",
+                JacksonUtil.toJsonString(context.getJob()), jstResult.getCode(), jstResult.getMsg(), JacksonUtil.toJsonString(query));
         throw new RuntimeException(jstResult.getMsg());
     }
 

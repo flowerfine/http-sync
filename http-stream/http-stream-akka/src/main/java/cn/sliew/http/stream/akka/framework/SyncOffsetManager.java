@@ -1,8 +1,8 @@
-package cn.sliew.http.stream.akka.framework2;
+package cn.sliew.http.stream.akka.framework;
 
 import cn.sliew.http.stream.dao.entity.job.JobSyncOffset;
 
-public interface SyncOffsetManager<Context extends SyncOffsetJobContext, Sub extends SubTask2> {
+public interface SyncOffsetManager<Context extends SyncOffsetJobContext, Sub extends SubTask> {
 
     JobSyncOffset getSyncOffset(Context context);
 
@@ -11,5 +11,4 @@ public interface SyncOffsetManager<Context extends SyncOffsetJobContext, Sub ext
     void initSyncOffset(Context context);
 
     void resetSyncOffset(Context context);
-
 }

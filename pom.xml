@@ -22,7 +22,7 @@
 
         <spring.boot.version>2.7.16</spring.boot.version>
         <spring.cloud.version>2021.0.8</spring.cloud.version>
-        <akka.version>2.8.5</akka.version>
+        <akka.version>2.6.21</akka.version>
         <alpakka.version>6.0.2</alpakka.version>
         <akka.http.version>10.5.2</akka.http.version>
         <scala.version>2.13.0</scala.version>
@@ -31,8 +31,9 @@
         <knife4j.version>4.1.0</knife4j.version>
         <arrow.version>7.0.0</arrow.version>
         <seatunnel.version>2.3.3</seatunnel.version>
-        <milky.version>1.0.7</milky.version>
+        <milky.version>1.0.10</milky.version>
         <flink.version>1.13.6</flink.version>
+        <schedulerx.version>1.11.0</schedulerx.version>
 
         <mysql.connector.version>8.0.22</mysql.connector.version>
     </properties>
@@ -153,6 +154,12 @@
                 <groupId>org.apache.arrow</groupId>
                 <artifactId>arrow-vector</artifactId>
                 <version>${arrow.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.aliyun.schedulerx</groupId>
+                <artifactId>schedulerx2-spring-boot-starter</artifactId>
+                <version>${schedulerx.version}</version>
             </dependency>
 
             <dependency>

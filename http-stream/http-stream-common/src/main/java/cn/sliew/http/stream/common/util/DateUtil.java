@@ -38,6 +38,31 @@ public enum DateUtil {
         return toDate(lastSecond);
     }
 
+    public static Date lastFiveMinutes() {
+        LocalDateTime lastSecond = LocalDateTime.now().minusMinutes(5L);
+        return toDate(lastSecond);
+    }
+
+    public static Date lastHour() {
+        LocalDateTime lastSecond = LocalDateTime.now().minusHours(1L);
+        return toDate(lastSecond);
+    }
+
+    public static Date lastThreeHour() {
+        LocalDateTime lastSecond = LocalDateTime.now().minusHours(3L);
+        return toDate(lastSecond);
+    }
+
+    public static Date lastDay() {
+        LocalDateTime lastDay = LocalDateTime.now().minusDays(1L);
+        return toDate(lastDay);
+    }
+
+    public static Date lastThreeDay() {
+        LocalDateTime lastDay = LocalDateTime.now().minusDays(3L);
+        return toDate(lastDay);
+    }
+
     public static String formatDateTime(Date date) {
         return DATE_TIME_FORMATTER.format(toLocalDateTime(date));
     }
