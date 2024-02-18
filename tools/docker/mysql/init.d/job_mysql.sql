@@ -7,11 +7,12 @@ CREATE TABLE `job_group`
     `group`        varchar(64) NOT NULL COMMENT '分组',
     `creator`      varchar(32) NOT NULL DEFAULT 'system' COMMENT '创建人',
     `modifier`     varchar(32) NOT NULL DEFAULT 'system' COMMENT '修改人',
-    `is_deleted`   tinyint(4) NOT NULL DEFAULT '0' COMMENT '删除标识。0: 未删除, 1: 已删除',
+    `deleter`      varchar(32) NOT NULL DEFAULT 'system' COMMENT '删除人',
     `gmt_create`   datetime    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `gmt_modified` datetime    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    `gmt_delete`   datetime COMMENT '删除时间',
     PRIMARY KEY (`id`),
-    UNIQUE KEY `uniq_group` (`group`)
+    UNIQUE KEY `uniq_group` (`group`, `gmt_delete`)
 ) ENGINE = InnoDB COMMENT ='任务分组';
 
 CREATE TABLE `job_info`
@@ -22,11 +23,12 @@ CREATE TABLE `job_info`
     `sub_job`      varchar(255) NOT NULL COMMENT '子任务',
     `creator`      varchar(32)  NOT NULL DEFAULT 'system' COMMENT '创建人',
     `modifier`     varchar(32)  NOT NULL DEFAULT 'system' COMMENT '修改人',
-    `is_deleted`   tinyint(4) NOT NULL DEFAULT '0' COMMENT '删除标识。0: 未删除, 1: 已删除',
+    `deleter`      varchar(32)  NOT NULL DEFAULT 'system' COMMENT '删除人',
     `gmt_create`   datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `gmt_modified` datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    `gmt_delete`   datetime COMMENT '删除时间',
     PRIMARY KEY (`id`),
-    UNIQUE KEY `uniq_job` (`group_id`, `job`, `sub_job`)
+    UNIQUE KEY `uniq_job` (`group_id`, `job`, `sub_job`, `gmt_delete`)
 ) ENGINE = InnoDB COMMENT ='任务信息';
 
 CREATE TABLE `job_authorization`
@@ -37,11 +39,12 @@ CREATE TABLE `job_authorization`
     `authorization` varchar(255) COMMENT '授权信息',
     `creator`       varchar(32)  NOT NULL DEFAULT 'system' COMMENT '创建人',
     `modifier`      varchar(32)  NOT NULL DEFAULT 'system' COMMENT '修改人',
-    `is_deleted`    tinyint(4) NOT NULL DEFAULT '0' COMMENT '删除标识。0: 未删除, 1: 已删除',
+    `deleter`       varchar(32)  NOT NULL DEFAULT 'system' COMMENT '删除人',
     `gmt_create`    datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `gmt_modified`  datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    `gmt_delete`    datetime COMMENT '删除时间',
     PRIMARY KEY (`id`),
-    UNIQUE KEY `uniq_account` (`account`, `sub_account`)
+    UNIQUE KEY `uniq_account` (`account`, `sub_account`, `gmt_delete`)
 ) ENGINE = InnoDB COMMENT ='任务授权';
 
 CREATE TABLE `job_sync_offset`
@@ -51,9 +54,10 @@ CREATE TABLE `job_sync_offset`
     `sync_offset`      varchar(255) COMMENT '进度位点',
     `creator`          varchar(32) NOT NULL DEFAULT 'system' COMMENT '创建人',
     `modifier`         varchar(32) NOT NULL DEFAULT 'system' COMMENT '修改人',
-    `is_deleted`       tinyint(4) NOT NULL DEFAULT '0' COMMENT '删除标识。0: 未删除, 1: 已删除',
+    `deleter`          varchar(32) NOT NULL DEFAULT 'system' COMMENT '删除人',
     `gmt_create`       datetime    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `gmt_modified`     datetime    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    `gmt_delete`       datetime COMMENT '删除时间',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB COMMENT ='任务进度位点';
 
@@ -65,9 +69,10 @@ CREATE TABLE `job_instance`
     `sync_offset_id`   bigint(20) COMMENT '进度位点id',
     `creator`          varchar(32) NOT NULL DEFAULT 'system' COMMENT '创建人',
     `modifier`         varchar(32) NOT NULL DEFAULT 'system' COMMENT '修改人',
-    `is_deleted`       tinyint(4) NOT NULL DEFAULT '0' COMMENT '删除标识。0: 未删除, 1: 已删除',
+    `deleter`          varchar(32) NOT NULL DEFAULT 'system' COMMENT '删除人',
     `gmt_create`       datetime    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `gmt_modified`     datetime    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    `gmt_delete`       datetime COMMENT '删除时间',
     PRIMARY KEY (`id`),
-    UNIQUE KEY `uniq_key` (`job_id`, `authorization_id`, `sync_offset_id`)
+    UNIQUE KEY `uniq_key` (`job_id`, `authorization_id`, `sync_offset_id`, `gmt_delete`)
 ) ENGINE = InnoDB COMMENT ='任务实例';

@@ -32,10 +32,10 @@ public class BaseEntity {
     private String modifier;
 
     /**
-     * 删除标识。0: 未删除, 1: 已删除
+     * 删除人
      */
-    @TableField("is_deleted")
-    private Integer isDeleted;
+    @TableField("deleter")
+    private String deleter;
 
     /**
      * 创建时间
@@ -48,5 +48,11 @@ public class BaseEntity {
      */
     @TableField(value = "gmt_modified", fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
+
+    /**
+     * 删除时间
+     */
+    @TableField("gmt_delete")
+    private Date gmtDelete;
 
 }

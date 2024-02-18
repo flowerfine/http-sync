@@ -6,17 +6,20 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
- * 任务进度位点
+ * 任务实例
  */
 @Data
-@TableName("job_sync_offset")
-public class JobSyncOffset extends BaseEntity {
+@TableName("job_instance")
+public class JobInstance extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @TableField("last_sync_offset")
-    private String lastSyncOffset;
+    @TableField("job_id")
+    private Long jobId;
 
-    @TableField("sync_offset")
-    private String syncOffset;
+    @TableField("authorization_id")
+    private Long authorizationId;
+
+    @TableField("sync_offset_id")
+    private Long syncOffsetId;
 }

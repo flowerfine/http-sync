@@ -5,22 +5,21 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="cn.sliew.http.stream.dao.entity.job.JobSyncOffset">
         <result column="id" property="id" />
-        <result column="job_id" property="jobId" />
-        <result column="authorization_id" property="authorizationId" />
         <result column="last_sync_offset" property="lastSyncOffset" />
         <result column="sync_offset" property="syncOffset" />
         <result column="creator" property="creator" />
         <result column="modifier" property="modifier" />
-        <result column="is_deleted" property="isDeleted" />
+        <result column="deleter" property="deleter" />
         <result column="gmt_create" property="gmtCreate" />
         <result column="gmt_modified" property="gmtModified" />
+        <result column="gmt_delete" property="gmtDelete" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id,
-        job_id, authorization_id, last_sync_offset, sync_offset,
-        creator, modifier, is_deleted, gmt_create, gmt_modified
+        last_sync_offset, sync_offset,
+        creator, modifier, deleter, gmt_create, gmt_modified, gmt_delete
     </sql>
 
 </mapper>

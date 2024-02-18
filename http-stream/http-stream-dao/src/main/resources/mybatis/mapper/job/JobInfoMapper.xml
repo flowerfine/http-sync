@@ -10,16 +10,17 @@
         <result column="sub_job" property="subJob" />
         <result column="creator" property="creator" />
         <result column="modifier" property="modifier" />
-        <result column="is_deleted" property="isDeleted" />
+        <result column="deleter" property="deleter" />
         <result column="gmt_create" property="gmtCreate" />
         <result column="gmt_modified" property="gmtModified" />
+        <result column="gmt_delete" property="gmtDelete" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id,
         group_id, job, sub_job,
-        creator, modifier, is_deleted, gmt_create, gmt_modified
+        creator, modifier, deleter, gmt_create, gmt_modified, gmt_delete
     </sql>
 
 </mapper>
