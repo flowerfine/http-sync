@@ -13,7 +13,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>serverless-workflow-hello-world</module>
         <module>http-workflow-kogito</module>
     </modules>
 
