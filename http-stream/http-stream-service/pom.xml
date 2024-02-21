@@ -14,8 +14,13 @@
     <dependencies>
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
-            <artifactId>http-stream-common</artifactId>
+            <artifactId>http-stream-remote</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>http-stream-akka</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>http-stream-dao</artifactId>

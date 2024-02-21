@@ -1,4 +1,4 @@
-package cn.sliew.http.stream.akka.enums;
+package cn.sliew.http.stream.service.enums;
 
 import lombok.Getter;
 

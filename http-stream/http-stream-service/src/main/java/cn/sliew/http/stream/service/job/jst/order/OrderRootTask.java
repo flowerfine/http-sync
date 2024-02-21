@@ -1,9 +1,9 @@
-package cn.sliew.http.stream.akka.jst.order;
+package cn.sliew.http.stream.service.job.jst.order;
 
-import cn.sliew.http.stream.akka.jst.JstIncrementalRootTask;
-import cn.sliew.http.stream.akka.jst.JstIncrementalSubTask;
 import cn.sliew.http.stream.dao.mapper.jst.JstOrderMapper;
 import cn.sliew.http.stream.remote.jst.JstRemoteService;
+import cn.sliew.http.stream.service.job.jst.JstIncrementalRootTask;
+import cn.sliew.http.stream.service.job.jst.JstIncrementalSubTask;
 
 import java.util.Date;
 
@@ -19,6 +19,6 @@ class OrderRootTask extends JstIncrementalRootTask {
 
     @Override
     protected JstIncrementalSubTask buildSubTask(Long id, Date startTime, Date endTime) {
-        return null;
+        return new OrderSubTask(id, startTime, endTime, jstRemoteService, jstOrderMapper);
     }
 }

@@ -27,6 +27,7 @@
         <quarkus.platform.version>3.2.9.Final</quarkus.platform.version>
         <quarkus-plugin.version>3.2.9.Final</quarkus-plugin.version>
         <kogito.bom.version>2.44.0.Alpha</kogito.bom.version>
+        <micrometer.version>1.9.15</micrometer.version>
         <akka.version>2.6.21</akka.version>
         <alpakka.version>6.0.2</alpakka.version>
         <akka.http.version>10.5.2</akka.http.version>
@@ -115,6 +116,13 @@
                 <version>${jackson.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-bom</artifactId>
+                <version>${micrometer.version}</version>
+                <type>pom</type>
             </dependency>
 
             <dependency>

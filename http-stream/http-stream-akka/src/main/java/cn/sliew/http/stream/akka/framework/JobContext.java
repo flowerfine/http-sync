@@ -1,21 +1,19 @@
 package cn.sliew.http.stream.akka.framework;
 
 import akka.actor.typed.ActorSystem;
-import cn.sliew.http.stream.dao.entity.job.JobAuthorization;
-import cn.sliew.http.stream.dao.entity.job.JobInfo;
 import io.micrometer.core.instrument.MeterRegistry;
 
 import java.util.Properties;
 
-public interface JobContext<Root extends RootTask, Sub extends SubTask> {
+public interface JobContext<Job, Authorization> {
 
     Long getJobId();
 
     Long getJobInstanceId();
 
-    JobInfo getJob();
+    Job getJob();
 
-    JobAuthorization getAuthorization();
+    Authorization getAuthorization();
 
     Properties getProperties();
 

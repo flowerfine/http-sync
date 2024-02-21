@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
-            <artifactId>http-stream-akka</artifactId>
+            <artifactId>http-stream-service</artifactId>
         </dependency>
 
         <dependency>

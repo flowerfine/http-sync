@@ -1,4 +1,4 @@
-package cn.sliew.http.stream.akka.jst;
+package cn.sliew.http.stream.service.job.jst;
 
 import cn.sliew.http.stream.akka.framework.base.AbstractRootTask;
 import lombok.extern.slf4j.Slf4j;

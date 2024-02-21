@@ -1,4 +1,4 @@
-package cn.sliew.http.stream.akka.jst;
+package cn.sliew.http.stream.service.job.jst;
 
 import akka.NotUsed;
 import akka.stream.javadsl.Source;

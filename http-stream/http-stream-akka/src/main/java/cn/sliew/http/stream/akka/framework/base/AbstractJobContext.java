@@ -2,27 +2,23 @@ package cn.sliew.http.stream.akka.framework.base;
 
 import akka.actor.typed.ActorSystem;
 import cn.sliew.http.stream.akka.framework.JobContext;
-import cn.sliew.http.stream.akka.framework.RootTask;
-import cn.sliew.http.stream.akka.framework.SubTask;
-import cn.sliew.http.stream.dao.entity.job.JobAuthorization;
-import cn.sliew.http.stream.dao.entity.job.JobInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.micrometer.core.instrument.MeterRegistry;
 
 import java.util.Properties;
 
-public abstract class AbstractJobContext<Root extends RootTask, Sub extends SubTask>
-        implements JobContext<Root, Sub> {
+public abstract class AbstractJobContext<Job, Authorization>
+        implements JobContext<Job, Authorization> {
 
     private final Long jobId;
     private final Long jobInstanceId;
-    private final JobInfo job;
-    private final JobAuthorization authorization;
+    private final Job job;
+    private final Authorization authorization;
     private final Properties properties;
     private final MeterRegistry meterRegistry;
     private final ActorSystem actorSystem;
 
-    public AbstractJobContext(Long jobId, Long jobInstanceId, JobInfo job, JobAuthorization authorization, Properties properties, MeterRegistry meterRegistry, ActorSystem actorSystem) {
+    public AbstractJobContext(Long jobId, Long jobInstanceId, Job job, Authorization authorization, Properties properties, MeterRegistry meterRegistry, ActorSystem actorSystem) {
         this.jobId = jobId;
         this.jobInstanceId = jobInstanceId;
         this.job = job;
@@ -43,12 +39,12 @@ public abstract class AbstractJobContext<Root extends RootTask, Sub extends SubT
     }
 
     @Override
-    public JobInfo getJob() {
+    public Job getJob() {
         return job;
     }
 
     @Override
-    public JobAuthorization getAuthorization() {
+    public Authorization getAuthorization() {
         return authorization;
     }
 

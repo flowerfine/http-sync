@@ -1,4 +1,4 @@
-package cn.sliew.http.stream.akka.jst;
+package cn.sliew.http.stream.service.job.jst;
 
 import akka.actor.typed.ActorSystem;
 import cn.sliew.http.stream.akka.framework.Parallel;
@@ -13,8 +13,8 @@ import io.micrometer.core.instrument.MeterRegistry;
 import java.util.Properties;
 
 public abstract class JstIncrementalJobContext
-        extends AbstractJobContext<JstIncrementalRootTask, JstIncrementalSubTask>
-        implements SyncOffsetJobContext<JstIncrementalRootTask, JstIncrementalSubTask>, Parallel {
+        extends AbstractJobContext<JobInfo, JobAuthorization>
+        implements SyncOffsetJobContext<JobInfo, JobAuthorization>, Parallel {
 
     private final SyncOffsetManager syncOffsetManager;
 

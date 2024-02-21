@@ -1,6 +1,6 @@
 package cn.sliew.http.stream.akka.framework;
 
-public interface SyncOffsetJobContext<Root extends RootTask, Sub extends SubTask> extends JobContext<Root, Sub> {
+public interface SyncOffsetJobContext<Job, Authorization> extends JobContext<Job, Authorization> {
 
     SyncOffsetManager getSyncOffsetManager();
 
