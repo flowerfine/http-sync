@@ -73,7 +73,7 @@ public abstract class AbstractJob {
                                 }));
 
         return source.via(subTasks)
-                .log(getJobName(context))
+                .log(context.getJobName())
                 .toMat(Sink.foreach(result -> processor.reduce(result)), Keep.both())
                 .run(actorSystem);
     }
@@ -82,10 +82,6 @@ public abstract class AbstractJob {
 
     void doExecuteAfter(Object param) {
 
-    }
-
-    protected String getJobName(JobContext context) {
-        return String.format("%s_%s", context.getJob().getJob(), context.getJob().getSubJob());
     }
 
     protected abstract JobContext buildJobContext(Object param);

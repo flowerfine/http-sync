@@ -6,20 +6,19 @@ import cn.sliew.http.stream.akka.framework.SyncOffsetJobContext;
 import cn.sliew.http.stream.akka.framework.SyncOffsetManager;
 import cn.sliew.http.stream.akka.framework.base.AbstractJobContext;
 import cn.sliew.http.stream.common.util.DateUtil;
-import cn.sliew.http.stream.dao.entity.job.JobAuthorization;
-import cn.sliew.http.stream.dao.entity.job.JobInfo;
+import cn.sliew.http.stream.dao.entity.job.JobInstance;
 import io.micrometer.core.instrument.MeterRegistry;
 
 import java.util.Properties;
 
 public abstract class JstIncrementalJobContext
-        extends AbstractJobContext<JobInfo, JobAuthorization>
-        implements SyncOffsetJobContext<JobInfo, JobAuthorization>, Parallel {
+        extends AbstractJobContext<JobInstance>
+        implements SyncOffsetJobContext<JobInstance>, Parallel {
 
     private final SyncOffsetManager syncOffsetManager;
 
-    public JstIncrementalJobContext(Long jobId, Long jobInstanceId, JobInfo job, JobAuthorization authorization, Properties properties, MeterRegistry meterRegistry, ActorSystem actorSystem, SyncOffsetManager syncOffsetManager) {
-        super(jobId, jobInstanceId, job, authorization, properties, meterRegistry, actorSystem);
+    public JstIncrementalJobContext(Long jobId, Long jobInstanceId, JobInstance job, Properties properties, MeterRegistry meterRegistry, ActorSystem actorSystem, SyncOffsetManager syncOffsetManager) {
+        super(jobId, jobInstanceId, job, properties, meterRegistry, actorSystem);
         this.syncOffsetManager = syncOffsetManager;
     }
 

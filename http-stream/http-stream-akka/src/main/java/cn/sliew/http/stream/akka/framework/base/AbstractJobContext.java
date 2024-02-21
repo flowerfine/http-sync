@@ -7,22 +7,20 @@ import io.micrometer.core.instrument.MeterRegistry;
 
 import java.util.Properties;
 
-public abstract class AbstractJobContext<Job, Authorization>
-        implements JobContext<Job, Authorization> {
+public abstract class AbstractJobContext<Job>
+        implements JobContext<Job> {
 
     private final Long jobId;
     private final Long jobInstanceId;
     private final Job job;
-    private final Authorization authorization;
     private final Properties properties;
     private final MeterRegistry meterRegistry;
     private final ActorSystem actorSystem;
 
-    public AbstractJobContext(Long jobId, Long jobInstanceId, Job job, Authorization authorization, Properties properties, MeterRegistry meterRegistry, ActorSystem actorSystem) {
+    public AbstractJobContext(Long jobId, Long jobInstanceId, Job job, Properties properties, MeterRegistry meterRegistry, ActorSystem actorSystem) {
         this.jobId = jobId;
         this.jobInstanceId = jobInstanceId;
         this.job = job;
-        this.authorization = authorization;
         this.properties = properties;
         this.meterRegistry = meterRegistry;
         this.actorSystem = actorSystem;
@@ -39,13 +37,8 @@ public abstract class AbstractJobContext<Job, Authorization>
     }
 
     @Override
-    public Job getJob() {
+    public Job getJobInfo() {
         return job;
-    }
-
-    @Override
-    public Authorization getAuthorization() {
-        return authorization;
     }
 
     @Override

@@ -4,6 +4,7 @@ import akka.NotUsed;
 import akka.japi.Pair;
 import akka.stream.javadsl.Source;
 import cn.sliew.http.stream.common.util.BeanUtil;
+import cn.sliew.http.stream.common.util.DateUtil;
 import cn.sliew.http.stream.dao.entity.jst.JstOrder;
 import cn.sliew.http.stream.dao.mapper.jst.JstOrderMapper;
 import cn.sliew.http.stream.remote.jst.JstRemoteService;
@@ -16,7 +17,6 @@ import cn.sliew.milky.common.util.JacksonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Date;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -26,8 +26,8 @@ class OrderSubTask extends JstIncrementalSubTask<OrderJobContext, OrdersSingleQu
     private final JstRemoteService jstRemoteService;
     private final JstOrderMapper jstOrderMapper;
 
-    public OrderSubTask(Long id, Date startTime, Date endTime, JstRemoteService jstRemoteService, JstOrderMapper jstOrderMapper) {
-        super(id, startTime, endTime);
+    public OrderSubTask(Long id, String startSyncOffset, String endSyncOffset, JstRemoteService jstRemoteService, JstOrderMapper jstOrderMapper) {
+        super(id, startSyncOffset, endSyncOffset);
         this.jstRemoteService = jstRemoteService;
         this.jstOrderMapper = jstOrderMapper;
     }
@@ -59,13 +59,13 @@ class OrderSubTask extends JstIncrementalSubTask<OrderJobContext, OrdersSingleQu
         if (jstResult.isSuccess()) {
             if (log.isDebugEnabled()) {
                 log.debug("请求聚水潭接口返回结果 job: {}, query: {}, page_index: {}, page_size: {}, data_count: {}, page_count: {}",
-                        JacksonUtil.toJsonString(context.getJob()), JacksonUtil.toJsonString(query), jstResult.getPageIndex(), jstResult.getPageSize(),
+                        JacksonUtil.toJsonString(context.getJobInfo()), JacksonUtil.toJsonString(query), jstResult.getPageIndex(), jstResult.getPageSize(),
                         jstResult.getDataCount(), jstResult.getPageCount());
             }
             return jstResult;
         }
         log.error("请求聚水潭接口失败! job: {}, code: {}, msg: {}, query: {}",
-                JacksonUtil.toJsonString(context.getJob()), jstResult.getCode(), jstResult.getMsg(), JacksonUtil.toJsonString(query));
+                JacksonUtil.toJsonString(context.getJobInfo()), jstResult.getCode(), jstResult.getMsg(), JacksonUtil.toJsonString(query));
         throw new RuntimeException(jstResult.getMsg());
     }
 
@@ -101,8 +101,8 @@ class OrderSubTask extends JstIncrementalSubTask<OrderJobContext, OrdersSingleQu
 
     private OrdersSingleQuery getFirstPageQuery() {
         OrdersSingleQuery query = new OrdersSingleQuery();
-        query.setStartTime(getStartTime());
-        query.setEndTime(getEndTime());
+        query.setStartTime(DateUtil.parseDateTime(getStartSyncOffset()));
+        query.setEndTime(DateUtil.parseDateTime(getEndSyncOffset()));
         query.setPageIndex(1);
         query.setPageSize(50);
         return query;

@@ -5,10 +5,10 @@ import akka.actor.typed.SpawnProtocol;
 import cn.sliew.http.stream.akka.AbstractJobSync;
 import cn.sliew.http.stream.akka.framework.JobContext;
 import cn.sliew.http.stream.akka.framework.RootTask;
-import cn.sliew.http.stream.dao.mapper.job.JobSyncOffsetMapper;
+import cn.sliew.http.stream.akka.framework.SyncOffsetManager;
+import cn.sliew.http.stream.dao.mapper.job.JobInstanceMapper;
 import cn.sliew.http.stream.dao.mapper.jst.JstOrderMapper;
 import cn.sliew.http.stream.remote.jst.JstRemoteService;
-import cn.sliew.http.stream.service.enums.JstJob;
 import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,10 +16,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderStreamJob extends AbstractJobSync {
 
-    private JstJob job = JstJob.ORDERS_SINGLE_QUERY;
-
     @Autowired
-    private JobSyncOffsetMapper jobSyncOffsetMapper;
+    private JobInstanceMapper jobInstanceMapper;
+    @Autowired
+    private SyncOffsetManager syncOffsetManager;
     @Autowired
     private JstRemoteService jstRemoteService;
     @Autowired
@@ -31,7 +31,8 @@ public class OrderStreamJob extends AbstractJobSync {
 
     @Override
     protected JobContext buildJobContext(Object param) {
-        return new OrderJobContext(1L, 1L, null, null, properties, meterRegistry, actorSystem, null);
+        Long id = (Long) param;
+        return new OrderJobContext(id, System.currentTimeMillis(), jobInstanceMapper.selectById(id), properties, meterRegistry, actorSystem, syncOffsetManager);
     }
 
     @Override

@@ -27,7 +27,7 @@ public abstract class AbstractRootTask<Context extends SyncOffsetJobContext, Sub
         List<Sub> subTasks = new ArrayList<>(pairs.size());
         for (int i = 0; i < pairs.size(); i++) {
             Pair<Date, Date> pair = pairs.get(i);
-            subTasks.add(buildSubTask(Long.valueOf(i), pair.first(), pair.second()));
+            subTasks.add(buildSubTask(Long.valueOf(i), DateUtil.formatDateTime(pair.first()), DateUtil.formatDateTime(pair.second())));
         }
         return subTasks;
     }
@@ -44,5 +44,5 @@ public abstract class AbstractRootTask<Context extends SyncOffsetJobContext, Sub
         return GradientUtil.getDefaultGradients();
     }
 
-    protected abstract Sub buildSubTask(Long id, Date startTime, Date endTime);
+    protected abstract Sub buildSubTask(Long id, String startSyncOffset, String endSyncOffset);
 }

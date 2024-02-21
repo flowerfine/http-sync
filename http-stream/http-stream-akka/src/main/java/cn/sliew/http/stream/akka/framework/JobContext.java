@@ -5,15 +5,15 @@ import io.micrometer.core.instrument.MeterRegistry;
 
 import java.util.Properties;
 
-public interface JobContext<Job, Authorization> {
+public interface JobContext<Job> {
 
     Long getJobId();
 
     Long getJobInstanceId();
 
-    Job getJob();
+    String getJobName();
 
-    Authorization getAuthorization();
+    Job getJobInfo();
 
     Properties getProperties();
 
