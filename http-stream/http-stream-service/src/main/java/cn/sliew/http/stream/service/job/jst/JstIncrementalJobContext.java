@@ -1,8 +1,7 @@
 package cn.sliew.http.stream.service.job.jst;
 
 import akka.actor.typed.ActorSystem;
-import cn.sliew.http.stream.akka.framework.Parallel;
-import cn.sliew.http.stream.akka.framework.SyncOffsetJobContext;
+import cn.sliew.http.stream.akka.framework.ParallelJobContext;
 import cn.sliew.http.stream.akka.framework.SyncOffsetManager;
 import cn.sliew.http.stream.akka.framework.base.AbstractJobContext;
 import cn.sliew.http.stream.common.util.DateUtil;
@@ -11,9 +10,7 @@ import io.micrometer.core.instrument.MeterRegistry;
 
 import java.util.Properties;
 
-public abstract class JstIncrementalJobContext
-        extends AbstractJobContext<JobInstance>
-        implements SyncOffsetJobContext<JobInstance>, Parallel {
+public abstract class JstIncrementalJobContext extends AbstractJobContext<JobInstance> implements ParallelJobContext<JobInstance> {
 
     private final SyncOffsetManager syncOffsetManager;
 

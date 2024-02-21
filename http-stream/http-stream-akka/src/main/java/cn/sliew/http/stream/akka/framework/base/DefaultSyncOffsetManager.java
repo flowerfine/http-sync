@@ -6,8 +6,6 @@ import cn.sliew.http.stream.akka.framework.SyncOffsetSubTask;
 import cn.sliew.http.stream.dao.entity.job.JobInstance;
 import cn.sliew.http.stream.dao.entity.job.JobSyncOffset;
 import cn.sliew.http.stream.dao.mapper.job.JobSyncOffsetMapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -21,10 +19,7 @@ public class DefaultSyncOffsetManager<Context extends SyncOffsetJobContext<JobIn
 
     @Override
     public JobSyncOffset getSyncOffset(Context context) {
-        LambdaQueryWrapper<JobSyncOffset> queryWrapper = Wrappers.lambdaQuery(JobSyncOffset.class)
-                .eq(JobSyncOffset::getId, context.getJobInfo().getSyncOffsetId());
-
-        JobSyncOffset syncOffset = jobSyncOffsetMapper.selectOne(queryWrapper);
+        JobSyncOffset syncOffset = jobSyncOffsetMapper.selectById(context.getJobInfo().getSyncOffsetId());
         if (syncOffset != null) {
             return syncOffset;
         }
