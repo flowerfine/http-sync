@@ -42,6 +42,7 @@
         <schedulerx.version>1.11.0</schedulerx.version>
         <temporal.version>1.23.0</temporal.version>
         <serverlessworkflow.version>4.0.5.Final</serverlessworkflow.version>
+        <jackson-jq.version>1.0.0-preview.20240207</jackson-jq.version>
 
         <mysql.connector.version>8.0.22</mysql.connector.version>
     </properties>
@@ -217,7 +218,6 @@
                 <version>${temporal.version}</version>
             </dependency>
 
-
             <dependency>
                 <groupId>io.serverlessworkflow</groupId>
                 <artifactId>serverlessworkflow-api</artifactId>
@@ -233,6 +233,18 @@
                 <artifactId>serverlessworkflow-spi</artifactId>
                 <version>${serverlessworkflow.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.serverlessworkflow</groupId>
+                <artifactId>serverlessworkflow-util</artifactId>
+                <version>${serverlessworkflow.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.thisptr</groupId>
+                <artifactId>jackson-jq</artifactId>
+                <version>${jackson-jq.version}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>mysql</groupId>
