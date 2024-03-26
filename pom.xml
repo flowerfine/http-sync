@@ -40,9 +40,19 @@
         <milky.version>1.0.10</milky.version>
         <flink.version>1.13.6</flink.version>
         <schedulerx.version>1.11.0</schedulerx.version>
+        <temporal.version>1.23.0</temporal.version>
+        <serverlessworkflow.version>4.0.5.Final</serverlessworkflow.version>
 
         <mysql.connector.version>8.0.22</mysql.connector.version>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>sonatype-nexus</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
@@ -192,9 +202,48 @@
             </dependency>
 
             <dependency>
+                <groupId>io.temporal</groupId>
+                <artifactId>temporal-sdk</artifactId>
+                <version>${temporal.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.temporal</groupId>
+                <artifactId>temporal-spring-boot-starter-alpha</artifactId>
+                <version>${temporal.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.temporal</groupId>
+                <artifactId>springboot-web-ui</artifactId>
+                <version>${temporal.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>io.serverlessworkflow</groupId>
+                <artifactId>serverlessworkflow-api</artifactId>
+                <version>${serverlessworkflow.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.serverlessworkflow</groupId>
+                <artifactId>serverlessworkflow-validation</artifactId>
+                <version>${serverlessworkflow.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.serverlessworkflow</groupId>
+                <artifactId>serverlessworkflow-spi</artifactId>
+                <version>${serverlessworkflow.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.connector.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.temporal</groupId>
+                <artifactId>temporal-testing</artifactId>
+                <version>${temporal.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
