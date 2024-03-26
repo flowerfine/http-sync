@@ -1,14 +1,15 @@
 server:
-  port: 3030
+  port: 8080
 spring:
   main.allow-bean-definition-overriding: true
-  application.name: temporal-samples
+  application.name: http-workflow-temporal
   # temporal specific configs
   temporal:
-    namespace: default
-    connection.target: 127.0.0.1:7233
+    namespace: data-center-dev
+    connection.target: 172.16.202.220:30917
     workersAutoDiscovery:
-      packages: io.temporal.samples.springboot
+      packages: cn.sliew.http.workflow.temporal.workflow
+
 # specific for samples
 samples:
   data:
