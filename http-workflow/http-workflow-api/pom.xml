@@ -11,4 +11,10 @@
     </parent>
     <artifactId>http-workflow-api</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.pf4j</groupId>
+            <artifactId>pf4j</artifactId>
+        </dependency>
+    </dependencies>
 </project>

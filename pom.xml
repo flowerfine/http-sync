@@ -43,6 +43,7 @@
         <temporal.version>1.23.0</temporal.version>
         <serverlessworkflow.version>4.0.5.Final</serverlessworkflow.version>
         <jackson-jq.version>1.0.0-preview.20240207</jackson-jq.version>
+        <pf4j.version>3.11.0</pf4j.version>
 
         <mysql.connector.version>8.0.22</mysql.connector.version>
     </properties>
@@ -245,6 +246,11 @@
                 <version>${jackson-jq.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.pf4j</groupId>
+                <artifactId>pf4j</artifactId>
+                <version>${pf4j.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>mysql</groupId>
