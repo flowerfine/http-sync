@@ -9,13 +9,6 @@
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>http-workflow</artifactId>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>http-workflow-api</module>
-        <module>http-workflow-kogito</module>
-        <module>http-workflow-temporal</module>
-    </modules>
+    <artifactId>http-workflow-api</artifactId>
 
 </project>
