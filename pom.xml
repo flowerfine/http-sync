@@ -28,6 +28,7 @@
         <quarkus-plugin.version>3.2.9.Final</quarkus-plugin.version>
         <kogito.bom.version>2.44.0.Alpha</kogito.bom.version>
         <micrometer.version>1.9.15</micrometer.version>
+        <jackson.version>2.13.5</jackson.version>
         <akka.version>2.6.21</akka.version>
         <alpakka.version>6.0.2</alpakka.version>
         <akka.http.version>10.5.2</akka.http.version>
@@ -78,6 +79,14 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring.cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>${jackson.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
