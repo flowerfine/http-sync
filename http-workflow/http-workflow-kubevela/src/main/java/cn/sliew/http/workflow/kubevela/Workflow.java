@@ -1,7 +1,7 @@
 package cn.sliew.http.workflow.kubevela;
 
+import cn.sliew.http.workflow.kubevela.spec.WorkflowExecuteMode;
 import cn.sliew.http.workflow.kubevela.spec.WorkflowSpec;
-import cn.sliew.http.workflow.kubevela.status.WorkflowStatus;
 import lombok.Data;
 
 @Data
@@ -11,5 +11,5 @@ public class Workflow {
     private String kind;
     private Object metadata;
     private WorkflowSpec spec;
-    private WorkflowStatus status;
+    private WorkflowExecuteMode mode;
 }

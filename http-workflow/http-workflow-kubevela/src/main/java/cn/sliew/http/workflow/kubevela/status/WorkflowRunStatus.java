@@ -16,8 +16,7 @@ public class WorkflowRunStatus {
     private String suspendState;
     private boolean terminated;
     private boolean finished;
-
-    private List steps;
+    private List<WorkflowStepStatus> steps;
 
     private Date startTime;
     private Date endTime;
