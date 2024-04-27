@@ -5,18 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>cn.sliew</groupId>
-        <artifactId>http-sync</artifactId>
+        <artifactId>http-workflow</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>http-workflow</artifactId>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>http-workflow-api</module>
-        <module>http-workflow-kogito</module>
-        <module>http-workflow-kubevela</module>
-        <module>http-workflow-temporal</module>
-    </modules>
+    <artifactId>http-workflow-kubevela</artifactId>
 
 </project>

@@ -21,5 +21,11 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.sreworks</groupId>
+            <artifactId>task-flow-service</artifactId>
+            <version>1.2.3</version>
+        </dependency>
     </dependencies>
 </project>
