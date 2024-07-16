@@ -30,6 +30,7 @@ public class ExampleController {
                         WorkflowOptions.newBuilder()
                                 .setTaskQueue("HelloSampleTaskQueue")
                                 .setWorkflowId("HelloSample")
+                                .setCronSchedule("@every 10s")
                                 .build());
 
         // bypass thymeleaf, don't return template name just result
@@ -40,10 +41,10 @@ public class ExampleController {
     public ResponseEntity<String> untypedHelloSample(Person person) {
         WorkflowStub workflowStub =
                 client.newUntypedWorkflowStub(
-                        HelloWorkflow.class.getSimpleName(),
+                        HelloWorkflow.WORKFLOW_METHOD,
                         WorkflowOptions.newBuilder()
                                 .setTaskQueue("HelloSampleTaskQueue")
-                                .setWorkflowId("UntypedHelloSample")
+                                .setWorkflowId("UntypedHelloSample5")
                                 .build());
 
         WorkflowExecution execution = workflowStub.start(person);
