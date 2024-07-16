@@ -1,26 +1,107 @@
 package cn.sliew.http.workflow.temporal.config;
 
-import io.temporal.spring.boot.autoconfigure.properties.TemporalProperties;
-import io.temporal.spring.boot.autoconfigure.properties.WorkersAutoDiscoveryProperties;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import io.temporal.client.WorkflowClientOptions;
+import io.temporal.client.schedules.ScheduleClientOptions;
+import io.temporal.serviceclient.WorkflowServiceStubsOptions;
+import io.temporal.spring.boot.TemporalOptionsCustomizer;
+import io.temporal.spring.boot.WorkerOptionsCustomizer;
+import io.temporal.worker.WorkerFactoryOptions;
+import io.temporal.worker.WorkerOptions;
+import io.temporal.worker.WorkflowImplementationOptions;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-import java.util.Arrays;
+import javax.annotation.Nonnull;
 
+@Configuration
 public class TemporalConfig {
 
-    static final String NAMESPACE_DATA_CENTER_DEV_NAME = "cn.sliew.http.workflow.temporal.config.data-center-dev";
-    static final String NAMESPACE_DATA_LINK_NAME = "cn.sliew.http.workflow.temporal.config.data-link";
-
-    @Bean(NAMESPACE_DATA_CENTER_DEV_NAME)
-    @ConfigurationProperties(prefix = "spring.temporal.data-center-dev")
-    public TemporalProperties dataCenterDevNamespace() {
-        return new TemporalProperties("data-center-dev", new WorkersAutoDiscoveryProperties(Arrays.asList("cn.sliew.http.workflow.temporal.workflow")), null, null, null, null, null);
+    @Bean
+    public TemporalOptionsCustomizer<WorkflowServiceStubsOptions.Builder> temporalWorkflowServiceStubsOptions() {
+        return new TemporalOptionsCustomizer<>() {
+            @Nonnull
+            @Override
+            public WorkflowServiceStubsOptions.Builder customize(
+                    @Nonnull WorkflowServiceStubsOptions.Builder optionsBuilder) {
+                // set options on optionsBuilder as needed
+                // ...
+                return optionsBuilder;
+            }
+        };
     }
 
-    @Bean(NAMESPACE_DATA_LINK_NAME)
-    @ConfigurationProperties(prefix = "spring.temporal.data-link")
-    public TemporalProperties datalinkNamespace() {
-        return new TemporalProperties("data-link", new WorkersAutoDiscoveryProperties(Arrays.asList("cn.sliew.http.workflow.temporal.controller")), null, null, null, null, null);
+    @Bean
+    public TemporalOptionsCustomizer<WorkflowClientOptions.Builder> temporalWorkflowClientOptions() {
+        return new TemporalOptionsCustomizer<>() {
+            @Nonnull
+            @Override
+            public WorkflowClientOptions.Builder customize(
+                    @Nonnull WorkflowClientOptions.Builder optionsBuilder) {
+                // set options on optionsBuilder as needed
+                // ...
+                return optionsBuilder;
+            }
+        };
+    }
+
+    @Bean
+    public TemporalOptionsCustomizer<ScheduleClientOptions.Builder> temporalScheduleClientOptions() {
+        return new TemporalOptionsCustomizer<>() {
+            @Nonnull
+            @Override
+            public ScheduleClientOptions.Builder customize(
+                    @Nonnull ScheduleClientOptions.Builder optionsBuilder) {
+                // set options on optionsBuilder as needed
+                // ...
+                return optionsBuilder;
+            }
+        };
+    }
+
+    @Bean
+    public TemporalOptionsCustomizer<WorkerFactoryOptions.Builder> temporalWorkerFactoryOptions() {
+        return new TemporalOptionsCustomizer<>() {
+            @Nonnull
+            @Override
+            public WorkerFactoryOptions.Builder customize(
+                    @Nonnull WorkerFactoryOptions.Builder optionsBuilder) {
+                // set options on optionsBuilder as needed
+                // ...
+                return optionsBuilder;
+            }
+        };
+    }
+
+    @Bean
+    public WorkerOptionsCustomizer temporalWorkerOptions() {
+        return new WorkerOptionsCustomizer() {
+            @Nonnull
+            @Override
+            public WorkerOptions.Builder customize(
+                    @Nonnull WorkerOptions.Builder optionsBuilder,
+                    @Nonnull String workerName,
+                    @Nonnull String taskQueue) {
+
+                // For CustomizeTaskQueue (also name of worker) we set worker
+                // to only handle workflow tasks and local activities
+                if (taskQueue.equals("CustomizeTaskQueue")) {
+                    optionsBuilder.setLocalActivityWorkerOnly(true);
+                }
+                return optionsBuilder;
+            }
+        };
+    }
+
+    @Bean
+    public TemporalOptionsCustomizer<WorkflowImplementationOptions.Builder> temporalWorkflowImplementationOptions() {
+        return new TemporalOptionsCustomizer<>() {
+            @Nonnull
+            @Override
+            public WorkflowImplementationOptions.Builder customize(
+                    @Nonnull WorkflowImplementationOptions.Builder optionsBuilder) {
+                // set options on optionsBuilder such as per-activity options
+                return optionsBuilder;
+            }
+        };
     }
 }
