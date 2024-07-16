@@ -177,11 +177,6 @@
                 <artifactId>milky-common</artifactId>
                 <version>${milky.version}</version>
             </dependency>
-            <dependency>
-                <groupId>cn.sliew</groupId>
-                <artifactId>milky-exception</artifactId>
-                <version>${milky.version}</version>
-            </dependency>
 
             <dependency>
                 <groupId>com.baomidou</groupId>
