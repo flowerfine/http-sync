@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 @ActivityImpl(taskQueues = "HelloSampleTaskQueue")
 public class HelloActivityImpl implements HelloActivity {
+
   @Value("${samples.data.language}")
   private String language;
 

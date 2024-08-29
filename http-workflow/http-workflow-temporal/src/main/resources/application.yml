@@ -6,7 +6,7 @@ spring:
   # temporal specific configs
   temporal:
     namespace: data-center-dev
-    connection.target: 172.16.202.220:30917
+    connection.target: 172.16.202.220:31773
     workersAutoDiscovery:
       packages: cn.sliew.http.workflow.temporal.workflow
 

@@ -38,10 +38,10 @@
         <knife4j.version>4.1.0</knife4j.version>
         <arrow.version>7.0.0</arrow.version>
         <seatunnel.version>2.3.3</seatunnel.version>
-        <milky.version>1.0.10</milky.version>
+        <milky.version>1.0.12</milky.version>
         <flink.version>1.13.6</flink.version>
         <schedulerx.version>1.11.0</schedulerx.version>
-        <temporal.version>1.23.0</temporal.version>
+        <temporal.version>1.24.1</temporal.version>
         <serverlessworkflow.version>4.0.5.Final</serverlessworkflow.version>
         <jackson-jq.version>1.0.0-preview.20240207</jackson-jq.version>
         <pf4j.version>3.11.0</pf4j.version>
@@ -219,7 +219,7 @@
             </dependency>
             <dependency>
                 <groupId>io.temporal</groupId>
-                <artifactId>temporal-spring-boot-starter-alpha</artifactId>
+                <artifactId>temporal-spring-boot-starter</artifactId>
                 <version>${temporal.version}</version>
             </dependency>
             <dependency>
