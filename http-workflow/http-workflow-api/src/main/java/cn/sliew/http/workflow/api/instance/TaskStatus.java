@@ -1,6 +1,6 @@
-package cn.sliew.http.workflow.api.execution;
+package cn.sliew.http.workflow.api.instance;
 
-public enum ExecutionStatus {
+public enum TaskStatus {
 
     BUFFERED(false, false),
     PENDING(false, false),
@@ -17,7 +17,7 @@ public enum ExecutionStatus {
     private boolean finished;
     private boolean blocked;
 
-    ExecutionStatus(boolean finished, boolean blocked) {
+    TaskStatus(boolean finished, boolean blocked) {
         this.finished = finished;
         this.blocked = blocked;
     }

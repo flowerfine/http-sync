@@ -3,7 +3,7 @@ package cn.sliew.http.workflow.api;
 import lombok.Data;
 
 @Data
-public class ExecutionContext {
+public class InstanceContext {
 
     private final String executionId;
     private final String stageId;

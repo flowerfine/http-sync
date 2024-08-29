@@ -1,6 +1,5 @@
 package cn.sliew.http.workflow.api.instance;
 
-import cn.sliew.http.workflow.api.execution.ExecutionStatus;
 import cn.sliew.http.workflow.api.trigger.Trigger;
 
 import java.util.Map;
@@ -21,7 +20,7 @@ public interface Instance {
 
     Long getEndTime();
 
-    ExecutionStatus getStatus();
+    TaskStatus getStatus();
 
     boolean isTerminated();
 }
