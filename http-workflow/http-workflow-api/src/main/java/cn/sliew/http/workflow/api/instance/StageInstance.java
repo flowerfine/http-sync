@@ -1,9 +1,9 @@
-package cn.sliew.http.workflow.api.execution;
+package cn.sliew.http.workflow.api.instance;
 
 import java.util.List;
 import java.util.Map;
 
-public interface StageExecution extends TaskInstance {
+public interface StageInstance extends Instance {
 
     Map<String, Object> getOutputs();
 
@@ -15,5 +15,5 @@ public interface StageExecution extends TaskInstance {
 
     String getParentStageId();
 
-    StageExecution getParentStage();
+    StageInstance getParentStage();
 }
